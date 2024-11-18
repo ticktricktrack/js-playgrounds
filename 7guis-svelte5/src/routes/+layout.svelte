@@ -5,7 +5,7 @@
 
   const examples = [
     { label: 'Counter', path: '01-counter' },
-    // { label: 'Temperature converter', path: '02-temperature-converter' },
+    { label: 'Temperature converter', path: '02-temperature' },
     // { label: 'Flight booker', path: '03-flight-booker' },
     // { label: 'Timer', path: '04-timer' },
     // { label: 'CRUD', path: '05-crud' },
@@ -14,7 +14,7 @@
   ]
 
   let { children } = $props()
-  let open = $state(false)
+  let open = $state(true)
 </script>
 
 <svelte:head>
