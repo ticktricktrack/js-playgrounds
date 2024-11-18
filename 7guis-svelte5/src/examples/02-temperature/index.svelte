@@ -1,18 +1,31 @@
 <script>
-  let celcius = $state(20);
-  let fahrenheit = $state(68);
+  class Temperature {
+    #celcius = $state(20);
+    #fahrenheit = $state(68);
 
-  function toFahrenheit() {
-    fahrenheit = celcius * 9 / 5 + 32;
+    get celcius() {
+      return this.#celcius;
+    }
+
+    set celcius(value) {
+      this.#celcius = value;
+      this.#fahrenheit = value * 9 / 5 + 32;
+    }
+
+    get fahrenheit() {
+      return this.#fahrenheit;
+    }
+
+    set fahrenheit(value) {
+      this.#fahrenheit = value;
+      this.#celcius = (value - 32) * 5 / 9;
+    }
   }
 
-  function toCelcius() {
-    celcius = (fahrenheit - 32) * 5 / 9;
-  }
-
+  const temperature = new Temperature();
 </script>
 
 <div class="flex-gap">
-  <span>Celcius</span><input type="number" bind:value={celcius} onchange={toFahrenheit}/>
-  <span>Stupid Fahrenheit</span><input type="number" bind:value={fahrenheit} onchange={toCelcius}/>
+  <span>Celcius</span><input type="number" bind:value={temperature.celcius} />
+  <span>Stupid Fahrenheit</span><input type="number" bind:value={temperature.fahrenheit} />
 </div>
