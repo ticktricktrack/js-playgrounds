@@ -9,7 +9,7 @@
     { label: 'Flight booker', path: '03-flights' },
     { label: 'Timer', path: '04-timer' },
     { label: 'CRUD', path: '05-crud' },
-    // { label: 'Circle drawer', path: '06-circle-drawer' },
+    { label: 'Circle drawer', path: '06-circles' },
     // { label: 'Cells', path: '07-cells' },
   ]
 
