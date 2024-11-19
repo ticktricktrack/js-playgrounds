@@ -8,7 +8,7 @@
     { label: 'Temperature converter', path: '02-temperature' },
     { label: 'Flight booker', path: '03-flights' },
     { label: 'Timer', path: '04-timer' },
-    // { label: 'CRUD', path: '05-crud' },
+    { label: 'CRUD', path: '05-crud' },
     // { label: 'Circle drawer', path: '06-circle-drawer' },
     // { label: 'Cells', path: '07-cells' },
   ]
