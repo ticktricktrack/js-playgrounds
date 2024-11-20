@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer type="module" src="app.js"></script>
+    <title>ChatApp</title>
+  </head>
+  <body>
+    <header>
+      <h1>Chat</h1>
+    </header>
+
+    <aside>
+      <h2>Users online</h2>
+      <ul id="users"></ul>
+    </aside>
+
+    <main>
+      <div id="conversation"></div>
+      <form id="form">
+        <input type="text" id="input" placeholder="Type a message">
+        <button>Send</button>
+      </form>
+    </main>
+
+    <template id="message">
+      <div class="message">
+        <span class="user"></span>
+        <p class="text"></p>
+      </div>
+    </template>
+  </body>
+</html>
