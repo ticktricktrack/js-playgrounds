@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  interface ButtonProps {
+  import type { Snippet } from "svelte";
+
+  type ButtonProps = {
     children: Snippet;
     onclick: ((e: MouseEvent) => void) | (() => void);
     className?: string;
-  }
-  let {children, className, onclick}: ButtonProps = $props();
+  };
+  const { children, className, onclick }: ButtonProps = $props();
 </script>
 
 <button class="btn {className}" onclick={onclick}>

@@ -1,29 +1,29 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json",
-	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
-		"sourceMap": true,
-		"strict": true,
-		"moduleResolution": "bundler",
-		// extra options
-		"noUnusedParameters": false, // Do not allow unused parameters in functions.
-		"noUnusedLocals": false, // Similar to noUnusedParameters, but for local variables.
-		"noUncheckedIndexedAccess": true, // it ensures that indexed access types are checked for undefined values,
-		"noImplicitOverride": true, // This option requires that any method in a subclass that overrides a method in a superclass must explicitly use the override keyword.
-		"noPropertyAccessFromIndexSignature": true, // This setting enforces that properties accessed via dot notation must be explicitly defined in the type.
-		"allowUnreachableCode": false, // When set to false, this option raises errors for code that is unreachable, meaning it cannot be executed.
-		"noFallthroughCasesInSwitch": true, // This option reports errors for switch statement cases that fall through without a break, return, or throw statement.
-		"noErrorTruncation": true, // When enabled, this option prevents TypeScript from truncating error messages, providing full details about the error.
-		"declaration": true // Generates corresponding .d.ts file
-}
-	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
-	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
-	//
-	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-	// from the referenced tsconfig.json - TypeScript does not merge them in
+  "extends": "./.svelte-kit/tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "allowUnreachableCode": false, // When set to false, this option raises errors for code that is unreachable, meaning it cannot be executed.
+    "noFallthroughCasesInSwitch": true, // This option reports errors for switch statement cases that fall through without a break, return, or throw statement.
+    "noImplicitOverride": true, // This option requires that any method in a subclass that overrides a method in a superclass must explicitly use the override keyword.
+    "noPropertyAccessFromIndexSignature": true, // This setting enforces that properties accessed via dot notation must be explicitly defined in the type.
+    "noUncheckedIndexedAccess": true, // it ensures that indexed access types are checked for undefined values,
+    "noUnusedLocals": false, // Similar to noUnusedParameters, but for local variables.
+    // extra options
+    "noUnusedParameters": false, // Do not allow unused parameters in functions.
+    "declaration": true, // Generates corresponding .d.ts file
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noErrorTruncation": true // When enabled, this option prevents TypeScript from truncating error messages, providing full details about the error.
+  }
+  // Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
+  // except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
+  //
+  // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
+  // from the referenced tsconfig.json - TypeScript does not merge them in
 }

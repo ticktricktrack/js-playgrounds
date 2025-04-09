@@ -1,78 +1,78 @@
 type SanityWorkExperience = {
-  _id: string
-  _type: 'devExperience'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  jobTitle?: string
-  company?: string
-  startDate?: string
-  endDate?: string
-}
+  _id: string;
+  _type: "devExperience";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  jobTitle?: string;
+  company?: string;
+  startDate?: string;
+  endDate?: string;
+};
 
 type SanityProject = {
-  _id: string
-  _type: 'project'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name: string
-  company: string
-  slug: string
-  dateAccomplished: string
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  company: string;
+  slug: string;
+  dateAccomplished: string;
   image: {
     asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   content: Array<
     | RawTextContent
     | ImageContent
-  >
-  stack: Array<string>
-}
+  >;
+  stack: Array<string>;
+};
 
-interface RawTextContent {
+type RawTextContent = {
   children: Array<{
-    marks?: Array<string>
-    text: string
-    _type: 'span'
-    _key: string
-  }>
-  style: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-  listItem?: 'bullet' | 'number'
+    marks?: Array<string>;
+    text: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+  listItem?: "bullet" | "number";
   markDefs?: Array<{
-    href?: string
-    _type: 'link'
-    _key: string
-  }>
-  level?: number
-  _type: 'block'
-  _key: string
-}
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+};
 
-interface RawImageContent {
+type RawImageContent = {
   asset: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-  }
-  media?: unknown
-  hotspot?: SanityImageHotspot
-  crop?: SanityImageCrop
-  _type: 'image'
-  _key: string
-}
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+  _key: string;
+};
 
-interface ProcessedProject {
+type ProcessedProject = {
   name: string;
   company: string;
   dateAccomplished: string;
@@ -80,15 +80,15 @@ interface ProcessedProject {
   projectImageUrl: string;
   slug: string;
   content: Array<ProcessedTextContent | ProcessedImageContent>;
-}
+};
 
-interface ProcessedTextContent {
-  type: 'text';
-  style: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+type ProcessedTextContent = {
+  type: "text";
+  style: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
   textToRender: string;
-}
+};
 
-interface ProcessedImageContent {
-  type: 'image';
+type ProcessedImageContent = {
+  type: "image";
   url: string;
-}
+};

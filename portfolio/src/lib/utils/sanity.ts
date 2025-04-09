@@ -1,7 +1,9 @@
-import { createClient, type ClientConfig } from "@sanity/client";
+import type { ClientConfig } from "@sanity/client";
+
+import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-const config: ClientConfig ={
+const config: ClientConfig = {
   projectId: "66qxipp7",
   dataset: "production",
   apiVersion: "2025-04-08",
@@ -23,25 +25,26 @@ export function processProjectEntries(rawProject: SanityProject) {
     stack: rawProject.stack,
     projectImageUrl,
     content: rawProject.content.map(processProjectContent),
-  }
+  };
   return processedProject;
 }
 
 export function processProjectContent(content: RawTextContent | RawImageContent) {
-  if (content._type === 'block') {
+  if (content._type === "block") {
     const processedTextContent: ProcessedTextContent = {
-      type: 'text',
+      type: "text",
       style: content.style,
-      textToRender: content.children.map((elem) => elem.text).join('\n'),
+      textToRender: content.children.map(elem => elem.text).join("\n"),
     };
     return processedTextContent;
-  } else {
+  }
+  else {
     const builder = imageUrlBuilder(sanityClient);
     const imageUrl = builder.image(content).url();
     const processedImageContent: ProcessedImageContent = {
-      type: 'image',
-      url:  imageUrl,
-    }
+      type: "image",
+      url: imageUrl,
+    };
     return processedImageContent;
   }
 }
