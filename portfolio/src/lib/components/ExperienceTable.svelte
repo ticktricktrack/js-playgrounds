@@ -1,32 +1,9 @@
 <script lang="ts">
-  interface WorkExperience {
-    jobTitle: string;
-    company: string;
-    startDate: string;
-    endDate?: string;
+  import type { DevExperience } from "$lib/types/sanity";
+  interface ExperienceTableProps {
+    workExperience: DevExperience[];
   }
-
-  const workExperience: WorkExperience[] = [
-    {
-      jobTitle: "Lead Developer",
-      company: "Groundsure",
-      startDate: "2015",
-      endDate: "2024",
-    },
-    {
-      jobTitle: "Senior Ruby Developer",
-      company: "Iris Connect",
-      startDate: "2013",
-      endDate: "2016",
-    },
-    {
-      jobTitle: "Ruby Developer",
-      company: "Incutio",
-      startDate: "2012",
-      endDate: "2013",
-    }
-  ];
-
+  let {workExperience}: ExperienceTableProps = $props();
 </script>
 
 <section class="default-margin work-experience mt-m">
