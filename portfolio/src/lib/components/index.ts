@@ -1,4 +1,4 @@
-export { default as Button } from "./Button.svelte";
+export { default as Button } from "./button.svelte";
 export { default as ExperienceTable } from "./experience-table.svelte";
 export { default as SectionHeadline } from "./section-headline.svelte";
 export { default as AboutMeSection } from "./Sections/about-me-section.svelte";
