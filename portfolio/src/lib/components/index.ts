@@ -1,8 +1,10 @@
 export { default as Button } from "./button.svelte";
 export { default as ExperienceTable } from "./experience-table.svelte";
+export { default as Footer } from "./footer.svelte";
+export { default as Header } from "./header.svelte";
 export { default as SectionHeadline } from "./section-headline.svelte";
 export { default as AboutMeSection } from "./Sections/about-me-section.svelte";
+export { default as ContactSection } from "./Sections/contact-section.svelte";
 export { default as HeroSection } from "./Sections/hero-section.svelte";
 export { default as MyWorkSection } from "./Sections/my-work-section.svelte";
 export { default as SkillsSection } from "./Sections/skills-section.svelte";
-export { default as ContactSection } from "./Sections/contact-section.svelte";
