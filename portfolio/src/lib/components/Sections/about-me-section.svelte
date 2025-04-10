@@ -11,7 +11,7 @@
   const { workExperience }: AboutMeProps = $props();
 
   function onclick() {
-    goto("/contact-form");
+    goto("#contact-form");
   }
 </script>
 

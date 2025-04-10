@@ -3,7 +3,7 @@
   import Button from "$components/Button.svelte";
 
   function onclick() {
-    goto("/contact-form");
+    goto("#contact-form");
   }
 </script>
 

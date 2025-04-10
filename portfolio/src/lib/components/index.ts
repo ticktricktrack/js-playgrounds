@@ -5,3 +5,4 @@ export { default as AboutMeSection } from "./Sections/about-me-section.svelte";
 export { default as HeroSection } from "./Sections/hero-section.svelte";
 export { default as MyWorkSection } from "./Sections/my-work-section.svelte";
 export { default as SkillsSection } from "./Sections/skills-section.svelte";
+export { default as ContactSection } from "./Sections/contact-section.svelte";
