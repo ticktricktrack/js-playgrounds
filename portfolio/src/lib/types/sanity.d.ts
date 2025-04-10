@@ -92,3 +92,9 @@ type ProcessedImageContent = {
   type: "image";
   url: string;
 };
+
+type Skill = {
+  name: string;
+  iconClass: string;
+  _key: string;
+};

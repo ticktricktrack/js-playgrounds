@@ -65,4 +65,23 @@
   .project {
     width: 48%;
   }
+
+  .project-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-to-article {
+    display: block;
+    font-size: 40px;
+    border: 1px solid black;
+    border-radius: 40px;
+    padding: 0 24px;
+  }
+
+  .company {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
 </style>
