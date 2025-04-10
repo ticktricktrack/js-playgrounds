@@ -1,7 +1,9 @@
 <script lang="ts">
-  import "./../app.css";
+  import {Header} from "$components";
+import "./../app.css";
 
   const { children } = $props();
 </script>
 
+<Header />
 {@render children()}

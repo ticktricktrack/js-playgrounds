@@ -28,5 +28,15 @@ export default antfu({
       case: "kebabCase",
       ignore: ["README.md"],
     }],
+    {
+      "svelte/prefer-const": [
+        "error",
+        {
+          "destructuring": "any",
+          "ignoreReadonly": true,
+          "excludedRunes": ["$props", "$derived"]
+        }
+      ]
+    }
   },
 });
