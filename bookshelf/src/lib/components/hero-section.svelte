@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from "$components";
   import heroImage from "$assets/hero.jpg";
+  import { Button } from "$components";
 </script>
 
 <section class="default-margin hero">

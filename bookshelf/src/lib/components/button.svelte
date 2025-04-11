@@ -9,7 +9,8 @@
   };
 
   type ButtonProps = {
-    onclick: (e: MouseEvent) => void;
+    onclick?: (e: MouseEvent) => void;
+    type?: "button" | "submit";
     href?: never;
   } & BasicProps;
 
@@ -20,23 +21,23 @@
 
   type Props = ButtonProps | LinkProps;
 
-  let { children, onclick, href, isSecondary, isDanger, isMenu, ...props }: Props = $props();
+  const { children, onclick, href, isSecondary, isDanger, isMenu, ...props }: Props = $props();
 </script>
 
 {#if href}
   <a {href}
-    class="btn"
-    class:btn-secondary={isSecondary}
-    class:btn-danger={isDanger}
-    class:btn-menu={isMenu}>
+     class="btn"
+     class:btn-secondary={isSecondary}
+     class:btn-danger={isDanger}
+     class:btn-menu={isMenu}>
     {@render children()}
   </a>
 {:else}
   <button {...props} {onclick}
-    class="btn"
-    class:btn-secondary={isSecondary}
-    class:btn-danger={isDanger}
-    class:btn-menu={isMenu}>
+          class="btn"
+          class:btn-secondary={isSecondary}
+          class:btn-danger={isDanger}
+          class:btn-menu={isMenu}>
     {@render children()}
   </button>
 {/if}
