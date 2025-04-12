@@ -4,7 +4,7 @@
   import "./../app.css";
 
   import { Header } from "$components";
-  import { setUserState } from "$components/state/user-state.svelte";
+  import { setUserState } from "$lib/state/user-state.svelte";
 
   let { data, children } = $props();
   let { session, supabase } = $derived(data);
