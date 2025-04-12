@@ -5,7 +5,8 @@
 
   let userContext = getUserState();
   let { user } = $derived(userContext);
-  $inspect(user.email);
+  $inspect("supa", userContext.supabase);
+  $inspect(user?.email);
 </script>
 
 <header>
@@ -30,7 +31,7 @@
           {user.email}
         </li>
         <li>
-          <Button isMenu={true} onclick={userContext.logout}>Logout</Button>
+          <Button isMenu={true} onclick={() => userContext.logout()}>Logout</Button>
         </li>
       </ul>
     {/if}

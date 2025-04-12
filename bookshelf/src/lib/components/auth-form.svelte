@@ -18,7 +18,7 @@
     <h1 class="mb-l">Login</h1>
   {/if}
   <div class="form-and-social-login">
-    <form class="auth-form" method="POST">
+    <form class="auth-form" method="POST" action={isRegistration ? "" : "/login/?/signInWithPassword"}>
       {#if form && form.errors?.length}
         {#each form.errors as error}
           <div class="auth-error">
@@ -49,7 +49,9 @@
     </form>
 
     <div class="social-login">
-
+      <form method="POST" action={isRegistration ? "/login/?githubLogin" : "?/githubLogin"}>
+        <Button type="submit">Login using Github</Button>
+      </form>
     </div>
   </div>
 </div>

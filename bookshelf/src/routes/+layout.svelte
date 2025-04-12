@@ -8,6 +8,7 @@
 
   let { data, children } = $props();
   let { session, supabase, user } = $derived(data);
+  $inspect(supabase);
 
   let userState = setUserState({ session: data.session, supabase: data.supabase, user: data.user });
 

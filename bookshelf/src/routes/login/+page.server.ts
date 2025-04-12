@@ -3,7 +3,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 export const actions = {
-  default: async ({ request, locals: { supabase } }) => {
+  signInWithPassword: async ({ request, locals: { supabase } }) => {
     const formData = await request.formData();
 
     const email = formData.get("email") as string;
@@ -19,6 +19,21 @@ export const actions = {
       return fail(400, returnObject);
     }
     redirect(303, "/private/dashboard");
+  },
+  githubLogin: async ({ locals: { supabase } }) => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: "http://localhost:5173/auth/callback",
+      },
+    });
+
+    if (error) {
+      console.log("GitHub login error:", error);
+      return fail(400, { message: "GitHub login failed" });
+    }
+
+    throw redirect(303, data.url);
   },
 } satisfies Actions;
 
