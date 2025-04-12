@@ -12,7 +12,11 @@
 </script>
 
 <div class="default-margin auth-container">
-  <h1 class="mb-l">Register / Login</h1>
+  {#if isRegistration}
+    <h1 class="mb-l">Register</h1>
+  {:else}
+    <h1 class="mb-l">Login</h1>
+  {/if}
   <div class="form-and-social-login">
     <form class="auth-form" method="POST">
       {#if form && form.errors?.length}
@@ -24,12 +28,16 @@
       {/if}
 
       {#if isRegistration}
-        <input type="text" placeholder="Name" name="name" />
+        <input type="text" placeholder="Name" name="name"
+               value={form?.name || ""} />
       {/if}
-      <input type="email" placeholder="Email" name="email" />
-      <input type="password" placeholder="Password" name="password" />
+      <input type="email" placeholder="Email" name="email"
+             value={form?.email || ""} />
+      <input type="password" placeholder="Password" name="password"
+             value={form?.password || ""} />
       {#if isRegistration}
-        <input type="password" placeholder="Confirm Password" name="passwordConfirmation" />
+        <input type="password" placeholder="Confirm Password" name="passwordConfirmation"
+               value={form?.passwordConfirmation || ""} />
       {/if}
       <Button type="submit">{isRegistration ? "Register" : "Login"}</Button>
 

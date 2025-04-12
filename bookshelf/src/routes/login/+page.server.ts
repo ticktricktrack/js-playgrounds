@@ -6,17 +6,16 @@ export const actions = {
   default: async ({ request, locals: { supabase } }) => {
     const formData = await request.formData();
 
-    const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    const passwordConfirmation = formData.get("passwordConfirmation") as string;
 
-    const returnObject: ReturnObject = validate(name, email, password, passwordConfirmation);
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const returnObject: ReturnObject = validate(email, password);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error || !data.user) {
-      console.error("Error signing up:", error);
       returnObject.success = false;
+      console.log(returnObject);
+
       return fail(400, returnObject);
     }
     redirect(303, "/private/dashboard");
@@ -28,36 +27,26 @@ export const actions = {
 type ReturnObject = {
   success: boolean;
   errors: string[];
-  name: string;
   email: string;
   password: string;
-  passwordConfirmation: string;
+  passwordConfirmation?: never;
+  name?: never;
 };
 
-function validate(name: string, email: string, password: string, passwordConfirmation: string) {
+function validate(email: string, password: string) {
   const returnObject: ReturnObject = {
     success: true,
     errors: [],
-    name,
     email,
     password,
-    passwordConfirmation,
   };
-
-  if (name.length < 3) {
-    returnObject.errors.push("Name must be at least 3 characters long");
-  }
 
   if (!email.includes("@")) {
     returnObject.errors.push("Email must be valid");
   }
 
-  if (password.length < 6) {
-    returnObject.errors.push("Password must be at least 6 characters long");
-  }
-
-  if (password !== passwordConfirmation) {
-    returnObject.errors.push("Passwords do not match");
+  if (!password.length) {
+    returnObject.errors.push("Password is required");
   }
 
   returnObject.success = returnObject.errors.length === 0;
