@@ -5,8 +5,7 @@
 
   let userContext = getUserState();
   let { user } = $derived(userContext);
-  $inspect("supa", userContext.supabase);
-  $inspect(user?.email);
+  $inspect(user?.name);
 </script>
 
 <header>

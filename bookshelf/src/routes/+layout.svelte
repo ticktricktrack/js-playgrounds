@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { invalidate } from "$app/navigation";
+  import { goto, invalidate } from "$app/navigation";
 
   import "./../app.css";
 
@@ -7,19 +7,16 @@
   import { setUserState } from "$components/state/user-state.svelte";
 
   let { data, children } = $props();
-  let { session, supabase, user } = $derived(data);
-  $inspect(supabase);
+  let { session, supabase } = $derived(data);
 
   let userState = setUserState({ session: data.session, supabase: data.supabase, user: data.user });
 
   $effect(() => {
-    userState.updateState({ session, supabase, user });
-  });
-
-  $effect(() => {
     const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
+      userState.updateState({ session: newSession, supabase, user: newSession?.user || null });
       if (newSession?.expires_at !== session?.expires_at) {
         invalidate("supabase:auth");
+      // goto("/login");
       }
     });
 

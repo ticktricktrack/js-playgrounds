@@ -14,6 +14,11 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 
   if (sessionData.data.session) {
     console.log("Session data:", sessionData.data.session.user);
+    const userId = sessionData.data.session.user.id;
+    const userName = sessionData.data.session.user.user_metadata.user_name;
+    await supabase
+      .from("user_names")
+      .upsert({ user_id: userId, name: userName }, { onConflict: "user_id" });
     throw redirect(303, "/private/dashboard");
   }
 

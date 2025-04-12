@@ -1,5 +1,6 @@
 import type { Session, SupabaseClient, User } from "@supabase/supabase-js";
 
+import { goto } from "$app/navigation";
 import { getContext, setContext } from "svelte";
 
 const USER_STATE_KEY = Symbol("user-state");
@@ -28,6 +29,7 @@ export class UserState {
 
   async logout() {
     await this.supabase?.auth.signOut();
+    goto("/login");
   }
 }
 
