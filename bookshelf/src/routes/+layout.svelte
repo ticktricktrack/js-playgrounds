@@ -4,10 +4,16 @@
   import "./../app.css";
 
   import { Header } from "$components";
-  import { onMount } from "svelte";
+  import { setUserState } from "$components/state/user-state.svelte";
 
   let { data, children } = $props();
   let { session, supabase, user } = $derived(data);
+
+  let userState = setUserState({ session: data.session, supabase: data.supabase, user: data.user });
+
+  $effect(() => {
+    userState.updateState({ session, supabase, user });
+  });
 
   $effect(() => {
     const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
