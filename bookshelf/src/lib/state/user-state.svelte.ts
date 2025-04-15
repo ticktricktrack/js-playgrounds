@@ -132,6 +132,20 @@ export class UserState {
       .slice(0, 10);
   }
 
+  async deleteBook(bookId: number) {
+    if (!this.supabase) {
+      return;
+    }
+    const { error, status } = await this.supabase
+      .from("books")
+      .delete()
+      .eq("id", bookId);
+
+    if (!error && status === 204) {
+      this.allBooks = this.allBooks.filter(book => book.id !== bookId);
+    }
+  }
+
   async logout() {
     await this.supabase?.auth.signOut();
     goto("/login");

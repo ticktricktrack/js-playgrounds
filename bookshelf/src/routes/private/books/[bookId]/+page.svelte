@@ -62,6 +62,12 @@
       await userContext.uploadBookCoverImage(book.id, file);
     }
   }
+
+  async function deleteBook(bookId: number) {
+    await userContext.deleteBook(bookId);
+    goBack();
+  }
+
 </script>
 
 <div class="book-page">
@@ -79,7 +85,7 @@
         <Button isSecondary={true} onclick={toggleEditMode}>
           {editMode ? "Save Changes" : "Edit"}
         </Button>
-        <Button isDanger={true} onclick={() => console.log("toggle delete mode")}>Delete from bookshelf</Button>
+        <Button isDanger={true} onclick={() => deleteBook(book.id)}>Delete from bookshelf</Button>
       </div>
     </div>
     <div class="book-cover">
