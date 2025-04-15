@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Book } from "$lib/state/user-state.svelte";
+
   import { StarRating } from "$components";
 
   let { book }: { book: Book } = $props();
@@ -12,7 +13,7 @@
   });
 </script>
 
-<a href={`/private/book/${book.id}`} class="book-card">
+<a href={`/private/books/${book.id}`} class="book-card">
   <div class="book-status">
     <span>{bookStatus}</span>
   </div>

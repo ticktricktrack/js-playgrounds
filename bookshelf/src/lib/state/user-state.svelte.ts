@@ -31,6 +31,41 @@ export class UserState {
     this.fetchUserData();
   }
 
+  async updateBook(bookId: number, updateObject: Partial<UpdateableBookFields>) {
+    if (!this.supabase) {
+      console.error("Supabase client is not initialized");
+      return;
+    }
+    const { status, error } = await this.supabase
+      .from("books")
+      .update(updateObject)
+      .eq("id", bookId);
+
+    if (status === 204) {
+      this.allBooks = this.allBooks.map((book) => {
+        if (book.id === bookId) {
+          return { ...book, ...updateObject };
+        }
+        return book;
+      });
+    }
+
+    if (error) {
+      console.error("Error updating book:", error);
+    }
+  }
+
+  getBookById(bookId: number) {
+    return this.allBooks.find((book) => book.id === bookId);
+  }
+
+  getCurrentlyReadingBooks() {
+    return this.allBooks
+      .filter((book) => book.started_on && !book.finished_on)
+      .toSorted((a,z) => new Date(z.started_on!).getTime() - new Date(a.started_on!).getTime())
+      .slice(0, 10);
+  }
+
   getHighestRatedBooks() {
     return this.allBooks
       .filter((book) => book.rating)
@@ -121,3 +156,5 @@ export type Book = {
   title: string;
   user_id: string;
 };
+
+type UpdateableBookFields = Omit<Book, "id" | "created_at" | "user_id">;

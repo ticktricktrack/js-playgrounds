@@ -20,6 +20,10 @@
     </div>
   </div>
 
+  <BookCategory booksToDisplay={userContext.getCurrentlyReadingBooks()}
+    categoryName={"Currently Reading"}
+  />
+
   <BookCategory booksToDisplay={userContext.getHighestRatedBooks()}
     categoryName={"Most loved Books"}
   />
