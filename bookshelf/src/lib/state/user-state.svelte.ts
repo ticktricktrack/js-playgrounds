@@ -55,28 +55,50 @@ export class UserState {
     }
   }
 
+  async uploadBookCoverImage(bookId: number, file: File) {
+    if (!this.user || !this.supabase) {
+      console.error("Supabase client is not initialized");
+      return;
+    }
+
+    const fileType = file.name.split(".").pop();
+    const filePath = `${this.user.id}/${bookId}.${fileType}`;
+
+    const { data, error } = await this.supabase
+      .storage
+      .from("book-covers")
+      .upload(filePath, file, { upsert: true });
+
+    if (error) {
+      return console.error("Error uploading book cover:", error);
+    }
+
+    const { data: { publicUrl } } = this.supabase.storage.from("book-covers").getPublicUrl(filePath);
+    this.updateBook(bookId, { cover_image: publicUrl });
+  }
+
   getBookById(bookId: number) {
-    return this.allBooks.find((book) => book.id === bookId);
+    return this.allBooks.find(book => book.id === bookId);
   }
 
   getCurrentlyReadingBooks() {
     return this.allBooks
-      .filter((book) => book.started_on && !book.finished_on)
-      .toSorted((a,z) => new Date(z.started_on!).getTime() - new Date(a.started_on!).getTime())
+      .filter(book => book.started_on && !book.finished_on)
+      .toSorted((a, z) => new Date(z.started_on!).getTime() - new Date(a.started_on!).getTime())
       .slice(0, 10);
   }
 
   getHighestRatedBooks() {
     return this.allBooks
-      .filter((book) => book.rating)
-      .toSorted((a,z) => z.rating! - a.rating!)
+      .filter(book => book.rating)
+      .toSorted((a, z) => z.rating! - a.rating!)
       .slice(0, 10);
   }
 
   getUnreadBooks() {
     return this.allBooks
-      .filter((book) => !book.started_on)
-      .toSorted((a,z) => new Date(z.created_at!).getTime() - new Date(a.created_at!).getTime())
+      .filter(book => !book.started_on)
+      .toSorted((a, z) => new Date(z.created_at!).getTime() - new Date(a.created_at!).getTime())
       .slice(0, 10);
   }
 
@@ -84,13 +106,13 @@ export class UserState {
     if (this.allBooks.length === 0) {
       return "";
     }
-    const genreCounts: { [key: string]: number } = {}
+    const genreCounts: { [key: string]: number } = {};
     this.allBooks.forEach((book) => {
-
-      const genres = book.genre? book.genre
-        .split(",")
-        .map((genre) => genre.trim())
-        .filter((genre) => genre !== "")
+      const genres = book.genre
+        ? book.genre
+            .split(",")
+            .map(genre => genre.trim())
+            .filter(genre => genre !== "")
         : [];
 
       genres.forEach((genre) => {
@@ -105,8 +127,8 @@ export class UserState {
 
   getFavoriteGenreBooks() {
     return this.allBooks
-      .filter((book) => book.genre?.includes(this.getFavoriteGenre()))
-      .toSorted((a,z) => z.rating! - a.rating!)
+      .filter(book => book.genre?.includes(this.getFavoriteGenre()))
+      .toSorted((a, z) => z.rating! - a.rating!)
       .slice(0, 10);
   }
 
