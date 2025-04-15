@@ -22,8 +22,6 @@
 
     return () => data.subscription.unsubscribe();
   });
-
-  $inspect(session);
 </script>
 
 <Header />

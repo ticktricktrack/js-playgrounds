@@ -14,7 +14,6 @@ export const actions = {
 
     if (error || !data.user) {
       returnObject.success = false;
-      console.log(returnObject);
 
       return fail(400, returnObject);
     }

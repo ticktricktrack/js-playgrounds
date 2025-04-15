@@ -1,11 +1,10 @@
 import type { Handle } from "@sveltejs/kit";
+import type { Database } from "$lib/types/database.types";
 
 import { createServerClient } from "@supabase/ssr";
 import { redirect } from "@sveltejs/kit";
 import { sequence } from "@sveltejs/kit/hooks";
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/public";
-
-import type { Database } from "$lib/types/database.types";
 
 const supabase: Handle = async ({ event, resolve }) => {
   /**
@@ -74,7 +73,7 @@ const authGuard: Handle = async ({ event, resolve }) => {
     redirect(303, "/login");
   }
 
-  if (event.locals.session && ["/login", "/register"].includes(event.url.pathname)) {
+  if (event.locals.session && !event.url.pathname.startsWith("/private")) {
     redirect(303, "/private/dashboard");
   }
 
