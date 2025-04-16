@@ -77,6 +77,29 @@ export class UserState {
     this.updateBook(bookId, { cover_image: publicUrl });
   }
 
+  async addBooksToShelf(booksToAdd: OpenAiBook[]) {
+    if (!this.user || !this.supabase) {
+      console.error("Supabase client is not initialized");
+      return;
+    }
+    console.log("Adding books to shelf: ", booksToAdd.length);
+
+    const usedId = this.user.id;
+    const processedBooks = booksToAdd.map(book => ({
+      title: book.bookTitle,
+      author: book.author,
+      description: book.description,
+      genre: book.genre,
+      user_id: usedId,
+    }));
+
+    const { error } = await this.supabase.from("books").insert(processedBooks);
+    if (error) {
+      throw new Error(error.message);
+    }
+    this.fetchUserData();
+  }
+
   getBookById(bookId: number) {
     return this.allBooks.find(book => book.id === bookId);
   }
@@ -191,6 +214,13 @@ export type Book = {
   started_on: string | null;
   title: string;
   user_id: string;
+};
+
+type OpenAiBook = {
+  author: string;
+  bookTitle: string;
+  description: string;
+  genre: string;
 };
 
 type UpdateableBookFields = Omit<Book, "id" | "created_at" | "user_id">;

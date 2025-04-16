@@ -23,9 +23,11 @@ export const POST: RequestHandler = async ({ request }) => {
                     What I need as information is the books that you can see on the image in this form:
                     {
                     "bookTitle": "Harry Potter and the Deathly Hallows",
-                    "author": "J.K. Rowling"
+                    "author": "J.K. Rowling",
+                    "description": "Harry, Ron and Hermione go into hiding as Voldemort takes over the Ministry of Magic. Later, the trio tries to decipher the clues left to them by Dumbledore to find and destroy Voldemort's Horcruxes.",
+                    "genre": "Fantasy,Young Adult",
                     }
-                    Please also make sure that you return an array, even if there is only one book visible on the image.`,
+                    Please also make sure that you return an array, even if there is only one book visible on the image. The description should be elaborate.`,
           },
           {
             type: "input_image",
