@@ -169,9 +169,29 @@ export class UserState {
     }
   }
 
+  async updateAccountDetails(userName: string, email: string) {
+    if (!this.session) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/update-account", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${this.session.access_token}`,
+        },
+        body: JSON.stringify({ email, userName }),
+      });
+    }
+    catch (error) {
+      console.error("Error updating account details:", error);
+    }
+  }
+
   async logout() {
     await this.supabase?.auth.signOut();
-    goto("/login");
+    goto("/");
   }
 
   async fetchUserData() {
@@ -191,6 +211,27 @@ export class UserState {
 
     this.allBooks = booksResponse.data;
     this.userName = userNameResponse.data.name;
+  }
+
+  async deleteAccount() {
+    if (!this.session) {
+      return;
+    }
+    try {
+      const response = await fetch("/api/delete-account", {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${this.session.access_token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete account");
+      }
+      await this.logout();
+      goto("/");
+    } catch (error) {
+      console.error("Error deleting account:", error);
+    }
   }
 }
 
